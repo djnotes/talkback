@@ -7,6 +7,7 @@ include __DIR__ . '/vendor/autoload.php';
 use \danog\MadelineProto\EventHandler;
 use \danog\MadelineProto\Settings\Logger as LoggerConfig;
 use \danog\MadelineProto\Logger;
+use \danog\MadelineProto\API;
 
 
 
@@ -57,7 +58,13 @@ $settings = new \danog\MadelineProto\Settings;
 
 
 $apiId = getenv('API_ID');
-$apiHash = getenv('API_HASH');
+$apiHash = getenv('API_HASH'); 
+$botToken = getenv('BOT_TOKEN');
+
+if( !$apiId or !$apiHash or !$botToken){
+	echo "Please provide API_ID and API_HASH and BOT_TOKEN environment variables \n";
+	exit(1);
+}
 
 $settings->setAppInfo(
 	(new \danog\MadelineProto\Settings\AppInfo())
@@ -67,18 +74,18 @@ $settings->setAppInfo(
 
 $settings->setLogger(
 	(new LoggerConfig)
-		->setType(Logger::FILE_LOGGER)
-		-> setExtra(__DIR__ . '/log/bot.log')
-		->setMaxSize(100 * 1024 * 1024)
+		->setType(Logger::ECHO_LOGGER)
+	//	-> setExtra(__DIR__ . '/log/bot.log')
+	//	->setMaxSize(100 * 1024 * 1024)
 
 );
 
-if( !$apiId or !$apiHash){
-	echo "Please provide API_ID and API_HASH environment variables \n";
-	exit(1);
+
+
+$api = new API(__DIR__ . '/session/talkback.session', $settings);
+if ( ! $api->getSelf() ){
+	$api->botLogin($botToken); //Log in non-interactively
 }
-
-
 
 BotTalk::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
 
