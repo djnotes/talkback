@@ -54,6 +54,19 @@ class BotTalk extends EventHandler{
 	}
 }
 
+
+//Check for log and session directories
+//
+if ( ! file_exists(__DIR__ . '/session')) {
+	echo "Creating session directory \n";
+	mkdir(__DIR__ . '/session');
+}
+
+if ( ! file_exists(__DIR__ . '/log')) {
+	echo "Creating log directory \n";
+	mkdir(__DIR__ . '/log');
+}
+
 $settings = new \danog\MadelineProto\Settings;
 
 
