@@ -2,3 +2,4 @@ vendor/
 session/**
 log/**
 MadelineProto.log
+*.env

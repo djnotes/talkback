@@ -100,5 +100,9 @@ if ( ! $api->getSelf() ){
 	$api->botLogin($botToken); //Log in non-interactively
 }
 
+$api->init();
+$api->start();
+$api->stop();
+
 BotTalk::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
 
