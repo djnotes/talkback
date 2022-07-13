@@ -95,14 +95,15 @@ $settings->setLogger(
 
 
 
+
 $api = new API(__DIR__ . '/session/talkback.session', $settings);
+
 if ( ! $api->getSelf() ){
 	$api->botLogin($botToken); //Log in non-interactively
 }
 
-$api->init();
-$api->start();
-$api->stop();
+$api->startAndLoop(BotTalk::class);
 
-BotTalk::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
+
+#BotTalk::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
 
