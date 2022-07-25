@@ -11,8 +11,11 @@ use \danog\MadelineProto\API;
 
 
 
-
 class BotTalk extends EventHandler{
+
+
+        private $admin = 'my_system_logs';
+
 	static array $WORD_BANK = [
 		"Hello" => "Hello",
 		"Hi" => "Hello",
@@ -27,15 +30,16 @@ class BotTalk extends EventHandler{
 	];
 
 
-        public function __construct(){
-	  self::$admin = getenv('ADMIN_ID');
           
+        public function __construct() {
+	  $this->admin = getenv('ADMIN_ID')? getenv('ADMIN_ID') : 'my_system_logs';
+	  yield $this->logger("ADMIN ID set to {$this->admin}");
         }
 	public function onStart() { 
                 $info = yield $this->getSelf();
 		yield $this->messages->sendMessage(
-		  peer: self::$admin,
-		  message: "{$info.name} started"
+		  peer: $this->admin,
+		  message: "{$info['first_name']} started"
                   
 		);
         }
@@ -90,7 +94,7 @@ $botToken = getenv('BOT_TOKEN');
 $adminId = getenv('ADMIN_ID');
 
 if( !$apiId or !$apiHash or !$botToken or !$adminId){
-	echo "Please provide API_ID and API_HASH and BOT_TOKEN environment variables \n";
+	echo "Please provide API_ID and API_HASH and BOT_TOKEN and ADMIN_ID environment variables \n";
 	exit(1);
 }
 
@@ -113,9 +117,8 @@ $settings->setLogger(
 
 $api = new API(__DIR__ . '/session/talkback.session', $settings);
 
-if ( ! $api->getSelf() ){
-	$api->botLogin($botToken); //Log in non-interactively
-}
+$api->botLogin($botToken);
+$api->async(true);
 
 $api->startAndLoop(BotTalk::class);
 

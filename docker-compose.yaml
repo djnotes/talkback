@@ -3,5 +3,9 @@ services:
     image: ghcr.io/djnotes/madelineproto-container:main
     
     volumes:
-      - .:/app
+      - ./bot.php:/app/app.php
+      - ./session:/app/session
+      - ./log:/app/log
+    env_file:
+     - ./bot.env
     
