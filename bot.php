@@ -26,6 +26,20 @@ class BotTalk extends EventHandler{
 		
 	];
 
+
+        public function __construct(){
+	  self::$admin = getenv('ADMIN_ID');
+          
+        }
+	public function onStart() { 
+                $info = yield $this->getSelf();
+		yield $this->messages->sendMessage(
+		  peer: self::$admin,
+		  message: "{$info.name} started"
+                  
+		);
+        }
+
 	public function onUpdateNewMessage(array $update): \Generator 
 	{
 
@@ -73,8 +87,9 @@ $settings = new \danog\MadelineProto\Settings;
 $apiId = getenv('API_ID');
 $apiHash = getenv('API_HASH'); 
 $botToken = getenv('BOT_TOKEN');
+$adminId = getenv('ADMIN_ID');
 
-if( !$apiId or !$apiHash or !$botToken){
+if( !$apiId or !$apiHash or !$botToken or !$adminId){
 	echo "Please provide API_ID and API_HASH and BOT_TOKEN environment variables \n";
 	exit(1);
 }

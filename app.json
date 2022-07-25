@@ -14,7 +14,10 @@
         },
         "BOT_TOKEN": {
             "description": "Get this from https://t.me/botfather"
-        }    
+        },
+	"ADMIN_ID": {
+	    "description": "Telegram ID of the technical admin (deployer) of the bot"
+	} 
     },
     "buildpacks": [
         {"url": "heroku/php"}

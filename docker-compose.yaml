@@ -1,0 +1,7 @@
+services:
+  bot:
+    image: ghcr.io/djnotes/madelineproto-container:main
+    
+    volumes:
+      - .:/app
+    
