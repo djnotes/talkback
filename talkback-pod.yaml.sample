@@ -1,0 +1,54 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.2.0
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.kubernetes.cri-o.ContainerType/talkback: container
+    io.kubernetes.cri-o.SandboxID/talkback: 3871e503272a4e68f41b323bd265f974007613201dc2fa56e02faf3608f8d31
+    io.kubernetes.cri-o.TTY/talkback: "false"
+    io.podman.annotations.autoremove/talkback: "FALSE"
+    io.podman.annotations.init/talkback: "FALSE"
+    io.podman.annotations.privileged/talkback: "FALSE"
+    io.podman.annotations.publish-all/talkback: "FALSE"
+  creationTimestamp: "2022-09-05T15:43:37Z"
+  labels:
+    app: talkback-pod
+  name: talkback-pod
+spec:
+  containers:
+  - args:
+    - php
+    - bot.php
+    env:
+    - name: BOT_TOKEN
+      value: #your bot token 
+    - name: API_ID
+      value: #your api id 
+    - name: ADMIN_ID
+      value: #your admin id 
+    - name: API_HASH
+      value: #your api hash 
+    image: ghcr.io/djnotes/madelineproto-image:latest
+    name: talkback
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+    volumeMounts:
+    - mountPath: /app/bot.php
+      name: home-mehdi-src-talkback-bot.php-host-0
+  hostname: talkback-pod
+  restartPolicy: Never
+  volumes:
+  - hostPath:
+      path: /home/mehdi/src/talkback/bot.php
+      type: File
+    name: home-mehdi-src-talkback-bot.php-host-0
+status: {}
+
