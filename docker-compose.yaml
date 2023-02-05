@@ -1,12 +1,12 @@
 services:
   talkback:
-    image: ghcr.io/djnotes/madelineproto-image:latest
-    
+    image: ghcr.io/djnotes/madelineproto-container:latest
+
     volumes:
       - .:/app
 
     env_file:
-      - ./variables.env
+      - ./bot.env
 
     command: php bot.php
 
