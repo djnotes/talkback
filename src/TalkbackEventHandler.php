@@ -11,9 +11,9 @@ class TalkbackEventHandler extends EventHandler
 {
 
 
-  private $admin;
+  private $admin = self::DEFAULT_ADMIN_ID;
 
-  private const DEFAULT_ADMIN_ID = 'djnotes';
+  private const DEFAULT_ADMIN_ID = 'the_bots_master';
 
   static array $WORD_BANK = [
     "Hello" => "Hello",
@@ -32,17 +32,11 @@ class TalkbackEventHandler extends EventHandler
     //TODO: Add more sentences or make me more intellient by integrating language models
   ];
 
-
-
-  public function __construct()
-  {
-    // $this->admin = getenv('ADMIN_ID') ?? self::DEFAULT_ADMIN_ID;
-    // yield $this->logger("ADMIN ID set to {$this->admin}");
-  }
   public function onStart()
   {
-    $this->admin = getenv('ADMIN_ID') ?? self::DEFAULT_ADMIN_ID;
-    yield $this->logger("ADMIN ID set to {$this->admin}");
+    // yield $this->logger("Inside onStart");
+    // $this->admin = getenv('ADMIN_ID') ?? self::DEFAULT_ADMIN_ID;
+    // yield $this->logger("ADMIN ID set to {$this->admin}");
     $info = yield $this->getSelf();
     yield $this->messages->sendMessage(
       peer: $this->admin,

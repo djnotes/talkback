@@ -42,13 +42,16 @@ $settings->setAppInfo(
 	(new \danog\MadelineProto\Settings\AppInfo())
 		->setApiId($apiId)
 		-> setApiHash($apiHash)
+		
 );
+
+//Set connection timeout
+$settings->getConnection()->setTimeout(20.0);
 
 $settings->setLogger(
 	(new LoggerConfig)
 		->setType(Logger::ECHO_LOGGER)
 );
-
 
 
 

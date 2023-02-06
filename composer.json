@@ -2,7 +2,7 @@
     "name": "djnotes/talkback",
     "description": "Simple Talkback Bot",
     "require":{
-        "danog/madelineproto": "8.0.0-beta42"
+        "danog/madelineproto": "^8.0.0-beta01"
     },
     "minimum-stability": "dev",
     "autoload": {

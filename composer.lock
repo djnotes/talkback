@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f14642f5923f1ca83f18d4a7715fe6e6",
+    "content-hash": "b3db9bef6e2ebe9b5bfac6f62433ade2",
     "packages": [
         {
             "name": "amphp/amp",
@@ -484,36 +484,34 @@
         },
         {
             "name": "amphp/http",
-            "version": "1.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "b65454643a7e92c6f1f75e00acac0a0a676ec8be"
+                "reference": "9c53bd482445ffa29365bcc2bf01fcb6fe2ce2b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/b65454643a7e92c6f1f75e00acac0a0a676ec8be",
-                "reference": "b65454643a7e92c6f1f75e00acac0a0a676ec8be",
+                "url": "https://api.github.com/repos/amphp/http/zipball/9c53bd482445ffa29365bcc2bf01fcb6fe2ce2b1",
+                "reference": "9c53bd482445ffa29365bcc2bf01fcb6fe2ce2b1",
                 "shasum": ""
             },
             "require": {
                 "amphp/hpack": "^3",
-                "php": ">=7.1"
+                "amphp/parser": "^1.1",
+                "php": ">=8.1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "^2-dev",
-                "phpunit/phpunit": "^9 || ^8 || ^7"
+                "amphp/php-cs-fixer-config": "^2",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^5.4"
             },
             "default-branch": true,
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
             "autoload": {
                 "files": [
-                    "src/functions.php"
+                    "src/functions.php",
+                    "src/Internal/constants.php"
                 ],
                 "psr-4": {
                     "Amp\\Http\\": "src"
@@ -532,7 +530,7 @@
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
             "support": {
                 "issues": "https://github.com/amphp/http/issues",
-                "source": "https://github.com/amphp/http/tree/v1.7.0"
+                "source": "https://github.com/amphp/http/tree/2.x"
             },
             "funding": [
                 {
@@ -540,27 +538,27 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-16T20:32:41+00:00"
+            "time": "2023-01-21T16:54:23+00:00"
         },
         {
             "name": "amphp/http-client",
-            "version": "v5.0.0-beta.7",
+            "version": "5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "32f6ef11bdafb515e002d80eb998596e1c26b90f"
+                "reference": "2043047f4554e3b0b090423f81f743c5f746b854"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/32f6ef11bdafb515e002d80eb998596e1c26b90f",
-                "reference": "32f6ef11bdafb515e002d80eb998596e1c26b90f",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/2043047f4554e3b0b090423f81f743c5f746b854",
+                "reference": "2043047f4554e3b0b090423f81f743c5f746b854",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/byte-stream": "^2",
                 "amphp/hpack": "^3",
-                "amphp/http": "^1.6",
+                "amphp/http": "^2-dev",
                 "amphp/pipeline": "^1",
                 "amphp/socket": "^2",
                 "amphp/sync": "^2",
@@ -571,20 +569,21 @@
             },
             "require-dev": {
                 "amphp/file": "^3-dev",
-                "amphp/http-server": "^3",
+                "amphp/http-server": "^3-dev",
                 "amphp/php-cs-fixer-config": "^2-dev",
                 "amphp/phpunit-util": "^3",
                 "ext-json": "*",
                 "kelunik/link-header-rfc5988": "^1",
                 "laminas/laminas-diactoros": "^2.3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "^5.4"
             },
             "suggest": {
                 "amphp/file": "Required for file request bodies and HTTP archive logging",
                 "ext-json": "Required for logging HTTP archives",
                 "ext-zlib": "Allows using compression for response bodies."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -629,7 +628,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.7"
+                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.8"
             },
             "funding": [
                 {
@@ -637,26 +636,26 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-08T16:32:41+00:00"
+            "time": "2023-02-01T00:39:02+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
-            "version": "v2.0.0-beta.1",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client-cookies.git",
-                "reference": "c5f1167be6f38a818a8af02eea7674bb81bd7419"
+                "reference": "ee07882d39818aef0556da13eeb050178f91d3a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/c5f1167be6f38a818a8af02eea7674bb81bd7419",
-                "reference": "c5f1167be6f38a818a8af02eea7674bb81bd7419",
+                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/ee07882d39818aef0556da13eeb050178f91d3a3",
+                "reference": "ee07882d39818aef0556da13eeb050178f91d3a3",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/dns": "^2",
-                "amphp/http": "^1.5",
+                "amphp/http": "^2-dev",
                 "amphp/http-client": "^5",
                 "amphp/sync": "^2",
                 "ext-filter": "*",
@@ -673,8 +672,9 @@
                 "amphp/phpunit-util": "^3",
                 "amphp/socket": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.23"
+                "psalm/phar": "^5.6"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -706,7 +706,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client-cookies/issues",
-                "source": "https://github.com/amphp/http-client-cookies/tree/v2.0.0-beta.1"
+                "source": "https://github.com/amphp/http-client-cookies/tree/v2.0.0-beta.2"
             },
             "funding": [
                 {
@@ -714,7 +714,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-11T21:31:04+00:00"
+            "time": "2023-02-03T00:13:11+00:00"
         },
         {
             "name": "amphp/log",
@@ -1637,16 +1637,16 @@
         },
         {
             "name": "amphp/websocket",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "1c9f585d142fe15ac6b5e30f28151788eecb8b10"
+                "reference": "1bdf01a832ff85677e2cf200cde1096a7d66179a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/1c9f585d142fe15ac6b5e30f28151788eecb8b10",
-                "reference": "1c9f585d142fe15ac6b5e30f28151788eecb8b10",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/1bdf01a832ff85677e2cf200cde1096a7d66179a",
+                "reference": "1bdf01a832ff85677e2cf200cde1096a7d66179a",
                 "shasum": ""
             },
             "require": {
@@ -1667,6 +1667,7 @@
             "suggest": {
                 "ext-zlib": "Required for compression"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -1706,7 +1707,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket/issues",
-                "source": "https://github.com/amphp/websocket/tree/v2"
+                "source": "https://github.com/amphp/websocket/tree/v2.0.0-beta.4"
             },
             "funding": [
                 {
@@ -1714,26 +1715,26 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-18T05:11:35+00:00"
+            "time": "2023-02-06T04:25:31+00:00"
         },
         {
             "name": "amphp/websocket-client",
-            "version": "v2.x-dev",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "6ea9b573c30fccd7901c995812a52da3d5093f92"
+                "reference": "709056dbbcfeb18dcaab20583b1a771d22ab5483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/6ea9b573c30fccd7901c995812a52da3d5093f92",
-                "reference": "6ea9b573c30fccd7901c995812a52da3d5093f92",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/709056dbbcfeb18dcaab20583b1a771d22ab5483",
+                "reference": "709056dbbcfeb18dcaab20583b1a771d22ab5483",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/byte-stream": "^2",
-                "amphp/http": "^1.3",
+                "amphp/http": "^2-dev",
                 "amphp/http-client": "^5",
                 "amphp/socket": "^2",
                 "amphp/websocket": "^2",
@@ -1751,6 +1752,7 @@
                 "psalm/phar": "^5.4",
                 "psr/log": "^1"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -1790,7 +1792,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket-client/issues",
-                "source": "https://github.com/amphp/websocket-client/tree/v2"
+                "source": "https://github.com/amphp/websocket-client/tree/2.x"
             },
             "funding": [
                 {
@@ -1798,7 +1800,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-14T19:24:11+00:00"
+            "time": "2023-02-06T05:35:05+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -2136,16 +2138,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "8.0.0-beta42",
+            "version": "v8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "aecad0165d4c1be7e4460689c26bbfed2b5e159f"
+                "reference": "bfea44e0dfd2aa8318254299f473523f074c55ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/aecad0165d4c1be7e4460689c26bbfed2b5e159f",
-                "reference": "aecad0165d4c1be7e4460689c26bbfed2b5e159f",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/bfea44e0dfd2aa8318254299f473523f074c55ea",
+                "reference": "bfea44e0dfd2aa8318254299f473523f074c55ea",
                 "shasum": ""
             },
             "require": {
@@ -2206,6 +2208,7 @@
                 "ext-pdo": "Install pdo extension to support database used as cache",
                 "ext-primemodule": "Install the primemodule and FFI extensions to speed up MadelineProto (https://prime.madelineproto.xyz)"
             },
+            "default-branch": true,
             "type": "project",
             "extra": {
                 "phabel": {
@@ -2249,7 +2252,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/8.0.0-beta42"
+                "source": "https://github.com/danog/MadelineProto/tree/v8"
             },
             "funding": [
                 {
@@ -2257,7 +2260,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-31T13:11:31+00:00"
+            "time": "2023-02-06T14:14:02+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2766,12 +2769,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "76dc21188e2128ca9fc5e9024cd93f1f5b312292"
+                "reference": "a340248d5f82d490fd92bcd2a5c840c07b149d7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/76dc21188e2128ca9fc5e9024cd93f1f5b312292",
-                "reference": "76dc21188e2128ca9fc5e9024cd93f1f5b312292",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a340248d5f82d490fd92bcd2a5c840c07b149d7c",
+                "reference": "a340248d5f82d490fd92bcd2a5c840c07b149d7c",
                 "shasum": ""
             },
             "require": {
@@ -2860,7 +2863,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-04T22:11:46+00:00"
+            "time": "2023-02-06T13:47:36+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -2985,12 +2988,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "fa9bf44ed62e7bb114818e33bfb8bcff1508800e"
+                "reference": "2487192558c893cf553648269215c1c5fdf11809"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/fa9bf44ed62e7bb114818e33bfb8bcff1508800e",
-                "reference": "fa9bf44ed62e7bb114818e33bfb8bcff1508800e",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/2487192558c893cf553648269215c1c5fdf11809",
+                "reference": "2487192558c893cf553648269215c1c5fdf11809",
                 "shasum": ""
             },
             "require": {
@@ -3087,7 +3090,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-17T13:56:10+00:00"
+            "time": "2023-02-05T23:44:51+00:00"
         },
         {
             "name": "psr/http-factory",
