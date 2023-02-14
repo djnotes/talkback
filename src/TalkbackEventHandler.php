@@ -40,7 +40,7 @@ class TalkbackEventHandler extends EventHandler
     $info = yield $this->getSelf();
     yield $this->messages->sendMessage(
       peer: $this->admin,
-      message: "{$info['first_name']} started"
+      message: $info['first_name'] . " started"
     );
   }
 

@@ -1,6 +1,6 @@
 services:
   talkback:
-    image: ghcr.io/djnotes/madelineproto-container:latest
+    image: ghcr.io/djnotes/madelineproto-container:v8.0.0-beta50
 
     volumes:
       - .:/app
