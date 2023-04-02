@@ -2,9 +2,12 @@
     "name": "djnotes/talkback",
     "description": "Simple Talkback Bot",
     "require":{
-        "danog/madelineproto": "dev-stable"
+        "danog/madelineproto": "^8.0.0-beta50",
+        "amphp/mysql": "v3.x-dev"
+
     },
+    "minimum-stability": "dev",
     "autoload": {
-	    
+        "psr-4" : {"Talkback\\" : "src/"}
     }
 }

@@ -1,0 +1,14 @@
+{
+    "name": "Talkback",
+    "image" : "ghcr.io/djnotes/madelineproto-image:v8.0.0-beta42",
+    "customizations": {
+        "vscode": {
+            "settings": {},
+            "extensions": [
+                "xdebug.php-pack",
+                "junstyle.php-cs-fixer"
+            ]
+        }
+    }
+
+}

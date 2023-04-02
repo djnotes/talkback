@@ -1,11 +1,12 @@
 services:
-  bot:
-    image: ghcr.io/djnotes/madelineproto-container:main
-    
+  talkback:
+    image: ghcr.io/djnotes/madelineproto-container:v8.0.0-beta50
+
     volumes:
-      - ./bot.php:/app/app.php
-      - ./session:/app/session
-      - ./log:/app/log
+      - .:/app
+
     env_file:
-     - ./bot.env
-    
+      - ./bot.env
+
+    command: php bot.php
+

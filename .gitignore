@@ -3,3 +3,5 @@ session/**
 log/**
 MadelineProto.log
 *.env
+talkback-pod.yaml
+composer.phar

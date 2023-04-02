@@ -15,10 +15,10 @@
 You can run this bot using my MadelineProto image from GHCR:
 
 ```
-docker run --rm --name mybot --volume `pwd`:/app ghcr.io/djnotes/madelineproto-container:main php bot.php
+podman run --rm --name mybot --volume `pwd`/bot.php:/app/bot.php ghcr.io/djnotes/madelineproto-container:latest php bot.php
 
 ```
-You can also use `podman` instead of `docker` in the above command if you have [Podman](https://podman.io) installed.
+You can also use `docker` instead of `podman` in the above command.
 
 ## Deploy To Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)

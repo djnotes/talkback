@@ -1,77 +1,17 @@
 <?php
 
+/**
+ * This sample file is intended to show you how to receive and use environment variables passed inside the container
+ * in the script. By passing the env-file parameter to Podman or Docker CLI, you can make bot logins non-interactive by using 
+ */
 
 include __DIR__ . '/vendor/autoload.php';
 
-
-use \danog\MadelineProto\EventHandler;
 use \danog\MadelineProto\Settings\Logger as LoggerConfig;
 use \danog\MadelineProto\Logger;
 use \danog\MadelineProto\API;
 
-
-
-class BotTalk extends EventHandler{
-
-
-        private $admin = 'my_system_logs';
-
-	static array $WORD_BANK = [
-		"Hello" => "Hello",
-		"Hi" => "Hello",
-		"Hallo" => "Hello",
-		"How are you?" => "Thank you. I'm fine!",
-		"How old are you?" => "I don't know really. It depends on when I started running on this computer :)",
-		"Are you male or female?" => "I am just a program",
-		"Will you be my friend?" => "I am your friend!",
-		"What can you do?" => "I can talk to you",
-		
-		
-	];
-
-
-          
-        public function __construct() {
-	  $this->admin = getenv('ADMIN_ID')? getenv('ADMIN_ID') : 'my_system_logs';
-	  yield $this->logger("ADMIN ID set to {$this->admin}");
-        }
-	public function onStart() { 
-                $info = yield $this->getSelf();
-		yield $this->messages->sendMessage(
-		  peer: $this->admin,
-		  message: "{$info['first_name']} started"
-                  
-		);
-        }
-
-	public function onUpdateNewMessage(array $update): \Generator 
-	{
-
-
-
-		if ($update['message']['message'] == '/start') {
-			yield $this->messages->sendMessage(['peer' => $update['message']['from_id'], 'message' => "Welcome to the bot! \nI am here to talk to you!\nAsk me something!"]);
-			return;
-		}
-		if ($update['message']['out'] == false){ 
-
-		
-
-		yield $this->logger("New message: " . print_r($update['message'], true));
-
-		$message = $update['message']['message'];
-
-		
-		$answer = self::$WORD_BANK[$message] ?? "Sorry I didn't get you";
-
-		$peer = $update['message']['from_id'];
-
-		yield $this->messages->sendMessage(['peer' => $peer, 'message' => $answer]);
-		}
-
-	}
-}
-
+use Talkback\TalkbackEventHandler;
 
 //Check for log and session directories
 //
@@ -102,26 +42,24 @@ $settings->setAppInfo(
 	(new \danog\MadelineProto\Settings\AppInfo())
 		->setApiId($apiId)
 		-> setApiHash($apiHash)
+		
 );
+
+//Set connection timeout
+$settings->getConnection()->setTimeout(20.0);
 
 $settings->setLogger(
 	(new LoggerConfig)
 		->setType(Logger::ECHO_LOGGER)
-	//	-> setExtra(__DIR__ . '/log/bot.log')
-	//	->setMaxSize(100 * 1024 * 1024)
-
 );
-
 
 
 
 $api = new API(__DIR__ . '/session/talkback.session', $settings);
 
 $api->botLogin($botToken);
-$api->async(true);
-
-$api->startAndLoop(BotTalk::class);
 
 
-#BotTalk::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
+TalkbackEventHandler::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
+
 
