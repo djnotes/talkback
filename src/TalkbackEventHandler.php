@@ -28,23 +28,6 @@ class TalkbackEventHandler extends EventHandler
   private string $dbName;
   private string $dbHost;
 
-  static array $WORD_BANK = [
-    "Hello" => "Hello",
-    "Hi" => "Hello",
-    "Hallo" => "Hello",
-    "How are you?" => "Thank you. I'm fine!",
-    "How old are you?" => "I don't know really. It depends on when I started running on this computer :)",
-    "Are you male or female?" => "I am just a program",
-    "Will you be my friend?" => "I am your friend!",
-    "What can you do?" => "I can talk to you",
-    "What is your name?" => "My name is Talkback.",
-    "How many languages do you know?" => "I only know English and my knowledge is limited!",
-    "What's up?" => "Nothing, just a little bit bored!",
-    "What are you doing now?" => "Hmm, playing with my bugs",
-    "You are so stupid" => "I wish I could take that as a compliment",
-    //TODO: Add more sentences or make me more intellient by integrating language models
-  ];
-
 
   protected function getSqlConfig() : MysqlConfig{    
     $this->dbName = getenv('MARIADB_DATABASE');
@@ -103,8 +86,6 @@ class TalkbackEventHandler extends EventHandler
 
     yield $this->logToDb(userId: $update['message']['peer_id']['user_id'], incoming : true, event: \json_encode($update));
 
-
-    // $answer = self::$WORD_BANK[$message] ?? "Sorry I didn't get you";      
 
     $query = "SELECT * FROM qa WHERE  question = :question";
     $statement = yield $pool->prepare($query);
