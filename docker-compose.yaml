@@ -1,5 +1,5 @@
 services:
-  talkback:
+  bot:
     image: ghcr.io/djnotes/madelineproto-container:v8.0.0-beta50
 
     volumes:
@@ -9,4 +9,21 @@ services:
       - ./bot.env
 
     command: php bot.php
+    
+    tty: true
+    stdin_open: true
+    
 
+  db:
+    image: docker.io/library/mariadb:10.5
+    volumes:
+      - talkback_db:/var/lib/mysql # Mariadb stores its data inside /var/lib/mysql
+      - ./data:/docker-entrypoint-initdb.d
+    env_file:
+      - ./bot.env
+
+volumes:
+  talkback_db:
+
+networks:
+  talkback_net:

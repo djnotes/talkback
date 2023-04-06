@@ -13,6 +13,7 @@ use \danog\MadelineProto\API;
 
 use Talkback\TalkbackEventHandler;
 
+
 //Check for log and session directories
 //
 if ( ! file_exists(__DIR__ . '/session')) {
@@ -55,11 +56,5 @@ $settings->setLogger(
 
 
 
-$api = new API(__DIR__ . '/session/talkback.session', $settings);
-
-$api->botLogin($botToken);
-
-
-TalkbackEventHandler::startAndLoop(__DIR__ . '/session/talkback.session', $settings);
-
+TalkbackEventHandler::startAndLoopBot(session: __DIR__ . '/session/talkback.session', token : $botToken, settings : $settings);
 
