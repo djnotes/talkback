@@ -3,7 +3,6 @@
 namespace Talkback;
 
 use danog\MadelineProto\EventHandler;
-use Amp\Sql\Pool;
 use Amp\Mysql\MysqlConfig;
 use Amp\Mysql\MysqlConnectionPool;
 use danog\MadelineProto\Exception;
@@ -14,47 +13,33 @@ use danog\MadelineProto\Exception;
 class TalkbackEventHandler extends EventHandler
 {
 
-
   private $admin = self::DEFAULT_ADMIN_ID;
 
   private const DEFAULT_ADMIN_ID = 'putyouridhere';
 
   private const NO_ANSWER_MESSAGE = "No answer";
 
-  // private Pool $pool;
 
-  private string $dbUser;
-  private string $dbPassword;
-  private string $dbName;
-  private string $dbHost;
+  protected function getMySqlConfig() : MysqlConfig{    
+    $dbName = getenv('MARIADB_DATABASE');
+    $dbHost = getenv('MARIADB_HOST');
+    $dbPassword = getenv('MARIADB_PASSWORD');
+    $dbUser = getenv('MARIADB_USER');
 
-
-  protected function getSqlConfig() : MysqlConfig{    
-    $this->dbName = getenv('MARIADB_DATABASE');
-    $this->dbHost = getenv('MARIADB_HOST');
-    $this->dbPassword = getenv('MARIADB_PASSWORD');
-    $this->dbUser = getenv('MARIADB_USER');
-
-    if(!$this->dbName || 
-        !$this->dbHost || 
-        !$this->dbUser || 
-        !$this->dbPassword
+    if(!$dbName || 
+        !$dbHost || 
+        !$dbUser || 
+        !$dbPassword
     ) {
       throw new \RuntimeException("Database environment variables not provided. Make sure you provide the variables in bot.env");
     }
 
-    return MysqlConfig::fromString("host={$this->dbHost} db={$this->dbName} user={$this->dbUser} password={$this->dbPassword}");
-    // $config = MysqlConfig::fromString("host=db db=talkback user=talkback_user password=17:30Apr5");
-    // yield $this->logger("Db pool created: " . print_r($this->pool, true));
+    return MysqlConfig::fromString("host={$dbHost} db={$dbName} user={$dbUser} password={$dbPassword}");
   }
 
 
   public function onStart()
   {
-    $pool = new MysqlConnectionPool($this->getSqlConfig());
-    // yield $this->logger("Inside onStart");
-    // $this->admin = getenv('ADMIN_ID') ?? self::DEFAULT_ADMIN_ID;
-    // yield $this->logger("ADMIN ID set to {$this->admin}");
     $info = yield $this->getSelf();
     $this->logToDb($info['id'], event : 'Bot started', incoming : false);
 
@@ -71,7 +56,7 @@ class TalkbackEventHandler extends EventHandler
   public function onUpdateNewMessage(array $update): \Generator
   {
 
-    $pool = new MysqlConnectionPool($this->getSqlConfig());
+    $pool = new MysqlConnectionPool($this->getMySqlConfig());
 
     if ($update['message']['message'] == '/start') {
       yield $this->messages->sendMessage(peer: $update['message']['from_id'], message: "Welcome to the bot! \nI am here to talk to you!\nAsk me something!");
@@ -126,7 +111,7 @@ class TalkbackEventHandler extends EventHandler
     bool $incoming
   ){  
 
-    $pool = new MysqlConnectionPool($this->getSqlConfig());
+    $pool = new MysqlConnectionPool($this->getMySqlConfig());
     $statement = yield $pool->prepare("INSERT INTO analytics (`user_id`, `incoming`, `event`) VALUES (:user_id, :incoming, :event)");
     try{
     $result = yield $statement->execute(
