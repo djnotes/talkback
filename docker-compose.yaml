@@ -12,6 +12,9 @@ services:
     
     tty: true
     stdin_open: true
+
+    depends_on: 
+      - db
     
 
   db:
@@ -24,6 +27,3 @@ services:
 
 volumes:
   talkback_db:
-
-networks:
-  talkback_net:

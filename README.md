@@ -13,6 +13,14 @@
 
 You can run this bot using my MadelineProto image from GHCR:
 
+First, run `composer update` using the MadelineProto image to update the dependencies:  
+
+```
+podman run --rm --volume `pwd`:/app ghcr.io/djnotes/madelineproto-container:v8.0.0-beta50 composer update
+```
+
+Next, fire up the services using Docker Compose:  
+
 ```
 docker-compose up
 
